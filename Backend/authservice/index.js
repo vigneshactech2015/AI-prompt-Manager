@@ -24,7 +24,7 @@ app.use(cors({
 app.use(express.json());
 
 
-app.post('/register', async (req, res) => {
+app.post('/api/authService/register', async (req, res) => {
     try {
         const { userName, password } = req.body;
         
@@ -58,7 +58,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
+app.post('/api/authService/login', async (req, res) => {
     try {
         const { userName, password } = req.body;
         
@@ -112,7 +112,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.post('/logout', async (req, res) => {
+app.post('/api/authService/logout', async (req, res) => {
     try {
         const authHeader = req.headers.authorization;
         const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
@@ -169,7 +169,7 @@ const authenticateToken = async (req, res, next) => {
 
 
 // Route to verify if token is valid
-app.post('/verify-token', authenticateToken, async (req, res) => {
+app.post('/api/authService/verify-token', authenticateToken, async (req, res) => {
     return res.status(200).json({
         data: { 
             message: "Token is valid",

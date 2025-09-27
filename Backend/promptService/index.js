@@ -1,4 +1,5 @@
 const express = require('express')
+require('dotenv').config();
 const mongoose = require('mongoose')
 
 const app = express()
@@ -21,7 +22,12 @@ app.use(express.json())
 // hit the auth service and check if token is valid or not
 const getUserId = async (req,res,next) => {
     try{
-        const response =  await axios.POST(AUTHSERVICEURL,)
+        const response =  await axios.post(AUTHSERVICEURL,{},{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer token'
+            }
+        })
         if(response.status == 200){
             next()
         }else {
@@ -53,8 +59,10 @@ app.post('/api/promptService/addPrompt',getUserId,async(req,res)=>{
         const {title,description,aiTool,isFavorite} = req.body;
         const newPrompt = new Prompt({title,description,aiTool,isFavorite,userId:req.user.userName}) 
         await newPrompt.save()
+        res.send(201).json({data:{message:"Prompt has been added successfully"}})
     }catch(err){
         console.log('Error in adding prompt',err)
+        return res.send(500).json({data:{message:'Adding prompt process failed'}})
     }
 })
 

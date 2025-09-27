@@ -23,13 +23,6 @@ app.use(cors({
 
 app.use(express.json());
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Auth service Connected to MongoDB Atlas'))
-  .catch((error) => {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
-  });
 
 app.post('/register', async (req, res) => {
     try {
@@ -191,4 +184,10 @@ app.post('/verify-token', authenticateToken, async (req, res) => {
 
 app.listen(PORT,()=>{
     console.log(`auth service is listening on ${PORT}`)
+    mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Auth service Connected to MongoDB Atlas'))
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  });
 })

@@ -23,13 +23,17 @@ app.use(express.json())
 // hit the auth service and check if token is valid or not
 const getUserId = async (req,res,next) => {
     try{
+        const authHeader = req.headers.authorization;
+        const token = authHeader && authHeader.split(' ')[1]; 
+
         const response =  await axios.post(AUTHSERVICEURL,{},{
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer token'
+                'Authorization': `Bearer ${token}`
             }
         })
         if(response.status == 200){
+            req.userId = response.data.data.user.userId
             next()
         }else {
            return res.status(401).json({data:{message:'Token is not valid'}})
@@ -43,10 +47,9 @@ const getUserId = async (req,res,next) => {
 
 
 app.get('/api/promptService/getPrompts',getUserId,async(req,res)=>{
-    console.log('user Id from req',req.user.userId)
     // fetch the prompt from mongodb based on userId
     try{
-         const response = await Prompt.find({userId:req.user.userName})
+         const response = await Prompt.find({userId:req.userId})
          return res.status(200).json({data:response})
     }catch (err){
         console.log('Error in fetching prompts',err)
@@ -56,12 +59,11 @@ app.get('/api/promptService/getPrompts',getUserId,async(req,res)=>{
 })
 
 app.post('/api/promptService/addPrompt',getUserId,async(req,res)=>{
-    console.log('user Id from req',req.user.userId)
     try{
         const {title,description,aiTool,isFavorite} = req.body;
-        const newPrompt = new Prompt({title,description,aiTool,isFavorite,userId:req.user.userName}) 
+        const newPrompt = new Prompt({title,description,aiTool,isFavorite,userId:req.userId}) 
         await newPrompt.save()
-        res.status(201).json({data:{message:"Prompt has been added successfully"}})
+        return res.status(201).json({data:{message:"Prompt has been added successfully"}})
     }catch(err){
         console.log('Error in adding prompt',err)
         return res.status(500).json({data:{message:'Adding prompt process failed'}})

@@ -53,7 +53,7 @@ app.get('/api/promptService/getPrompts',getUserId,async(req,res)=>{
          return res.status(200).json({data:response})
     }catch (err){
         console.log('Error in fetching prompts',err)
-        return res.status(500).json({data:{message:'Internal server Error'}})
+        return res.status(500).json({data:{message:'Unable to fetch the prompts'}})
         
     }
 })
@@ -67,6 +67,27 @@ app.post('/api/promptService/addPrompt',getUserId,async(req,res)=>{
     }catch(err){
         console.log('Error in adding prompt',err)
         return res.status(500).json({data:{message:'Adding prompt process failed'}})
+    }
+})
+
+app.delete('/api/promptService/deletePrompt',getUserId,async(req,res)=>{
+    try{
+        await Prompt.findOneAndDelete({_id:req.body.id})
+        return res.status(200).json({data:{message:"Prompt has been deleted successfully"}})
+    }catch(err){
+        console.log('Error in deleting prompts',err)
+        return res.status(500).json({data:{message:'Prompt not deleted'}})
+    }
+})
+
+app.patch('/api/promptService/updatePrompt',getUserId,async(req,res)=>{
+    try{
+        const {title,description,aiTool,isFavorite,id} = req.body
+        await Prompt.findByIdAndUpdate(req.body.id, {title,description,aiTool,isFavorite})
+        return res.status(200).json({data:{message:"Prompt has been updated successfully"}})
+    }catch(err){
+        console.log('Error in updating Prompt',err)
+        return res.status(500).json({data:{message:'Prompt not updated'}})
     }
 })
 

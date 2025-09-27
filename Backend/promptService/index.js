@@ -1,10 +1,11 @@
 const express = require('express')
 require('dotenv').config();
 const mongoose = require('mongoose')
+const axios = require('axios')
 
 const app = express()
 const PORT = process.env.PORT
-const AUTHSERVICEURL = process.env.AUTHSERVICEURL
+const AUTHSERVICEURL = `${process.env.AUTHSERVICEURL}`
 const cors = require('cors');
 const Prompt =  require('./models/Prompt');
 
@@ -31,11 +32,12 @@ const getUserId = async (req,res,next) => {
         if(response.status == 200){
             next()
         }else {
-           return res.send(401).json({data:{message:'Token is not valid'}})
+           return res.status(401).json({data:{message:'Token is not valid'}})
         }
       
     }  catch(err){
-        return res.send(401).json({data:{message:'Unable to hit the auth service'}})
+        console.log('unable to hit auth service',err)
+        return res.status(401).json({data:{message:'Unable to hit the auth service'}})
     } 
 }
 
@@ -45,10 +47,10 @@ app.get('/api/promptService/getPrompts',getUserId,async(req,res)=>{
     // fetch the prompt from mongodb based on userId
     try{
          const response = await Prompt.find({userId:req.user.userName})
-         return res.send(200).json({data:response})
+         return res.status(200).json({data:response})
     }catch (err){
         console.log('Error in fetching prompts',err)
-        return res.send(500).json({data:{message:'Internal server Error'}})
+        return res.status(500).json({data:{message:'Internal server Error'}})
         
     }
 })
@@ -59,10 +61,10 @@ app.post('/api/promptService/addPrompt',getUserId,async(req,res)=>{
         const {title,description,aiTool,isFavorite} = req.body;
         const newPrompt = new Prompt({title,description,aiTool,isFavorite,userId:req.user.userName}) 
         await newPrompt.save()
-        res.send(201).json({data:{message:"Prompt has been added successfully"}})
+        res.status(201).json({data:{message:"Prompt has been added successfully"}})
     }catch(err){
         console.log('Error in adding prompt',err)
-        return res.send(500).json({data:{message:'Adding prompt process failed'}})
+        return res.status(500).json({data:{message:'Adding prompt process failed'}})
     }
 })
 

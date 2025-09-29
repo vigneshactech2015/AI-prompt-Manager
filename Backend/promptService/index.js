@@ -82,12 +82,23 @@ app.delete('/api/promptService/deletePrompt',getUserId,async(req,res)=>{
 
 app.patch('/api/promptService/updatePrompt',getUserId,async(req,res)=>{
     try{
-        const {title,description,aiTool,isFavorite,id} = req.body
-        await Prompt.findByIdAndUpdate(req.body.id, {title,description,aiTool,isFavorite})
+        const {title,description,aiTool,isFavourite,id} = req.body
+        await Prompt.findByIdAndUpdate(id, {title,description,aiTool,isFavourite})
         return res.status(200).json({data:{message:"Prompt has been updated successfully"}})
     }catch(err){
         console.log('Error in updating Prompt',err)
         return res.status(500).json({data:{message:'Prompt not updated'}})
+    }
+})
+
+app.patch('/api/promptService/favoritePrompt',getUserId,async(req,res)=>{
+    try{
+        const {isFavourite,id} = req.body
+        await Prompt.findByIdAndUpdate(id,{isFavourite})
+        return res.status(200).json({data:{message:"Prompt has been marked as favorite"}})
+    }catch(err){
+        console.log('Error in marking the favorite',err)
+        return res.status(500).json({data:{message:'Error in marking the prompt as favorite'}})
     }
 })
 

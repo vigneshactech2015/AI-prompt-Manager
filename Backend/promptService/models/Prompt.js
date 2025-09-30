@@ -20,6 +20,19 @@ const promptSchema = new mongoose.Schema({
     userId:{
         type:String,
         required:true
+    },
+    // Analytics fields
+    viewCount:{
+        type:Number,
+        default:0
+    },
+    copyCount:{
+        type:Number,
+        default:0
+    },
+    favoriteCount:{
+        type:Number,
+        default:0
     }
 })
 

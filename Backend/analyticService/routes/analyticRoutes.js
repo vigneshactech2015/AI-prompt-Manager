@@ -6,7 +6,8 @@ const {getReport} = require('../controller/index.js')
 
 const router = express.Router()
 
-router.get('/getReport',getUserId,getReport)
+// Get overall analytics report
+router.get('/getReport', getUserId, getReport)
 
 
 module.exports = router;

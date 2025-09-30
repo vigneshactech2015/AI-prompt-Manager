@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "30f84b0d-bb94-4890-8fdf-c92c9fa6075c",
+		"name": "PromptManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26667497"
+	},
+	"item": [
+		{
+			"name": "authservice",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"vignesh\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3002/api/authService/login"
+					},
+					"response": []
+				},
+				{
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"vijayakumar\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3002/api/authService/register"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTkxNDAwODgsImV4cCI6MTc1OTc0NDg4OH0.DtlgCazrFnrXkxG7ca4fi1r_8pHs14W5RM3B9CaEooc"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:3002/api/authService/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "verifyToken",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTkxNDAwODgsImV4cCI6MTc1OTc0NDg4OH0.DtlgCazrFnrXkxG7ca4fi1r_8pHs14W5RM3B9CaEooc"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3002/api/authService/verify-token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "promptService",
+			"item": [
+				{
+					"name": "getPrompts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3003/api/promptService/getPrompts"
+					},
+					"response": []
+				},
+				{
+					"name": "addPrompt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"title2\",\r\n    \"description\":\"description2\",\r\n    \"isFavorite\":false,\r\n    \"aiTool\":\"gemini\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/promptService/addPrompt"
+					},
+					"response": []
+				},
+				{
+					"name": "deletePrompt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"68d7e5e091e7e280ccecb0ea\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/promptService/deletePrompt"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePrompt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"title\":\"title 2 updated\",\r\n    \"description\":\"description updated\",\r\n    \"isFavourite\":true,\r\n    \"aiTool\":\"gemini\",\r\n    \"id\":\"68da0ff006eac08e072ddf09\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/promptService/updatePrompt"
+					},
+					"response": []
+				},
+				{
+					"name": "favoritePrompt",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isFavourite\":false,\r\n    \"id\":\"68da0ff006eac08e072ddf09\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3003/api/promptService/favoritePrompt"
+					},
+					"response": []
+				},
+				{
+					"name": "getPromptById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3003/api/promptService/getPrompt/id"
+					},
+					"response": []
+				},
+				{
+					"name": "trackView",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3003/api/promptService/trackView/id"
+					},
+					"response": []
+				},
+				{
+					"name": "trackCopy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:3003/api/promptService/trackCopy/id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "analyticService",
+			"item": [
+				{
+					"name": "getReport",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGQ3YjNkNGQ4NmU0MzIzN2RkMDA3MTUiLCJ1c2VyTmFtZSI6InZpZ25lc2giLCJpYXQiOjE3NTg5Nzc4NTMsImV4cCI6MTc1OTU4MjY1M30.Cp74JAVpFSjxY6Mlt_WIQhAp6UMrgTSWaiFF2HYTTIE"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3004/api/analyticService/getReport"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

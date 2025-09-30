@@ -1,8 +1,7 @@
 <script>
-    import './login.css';
+    import '../login/login.css';
     import {goto} from '$app/navigation';
-    import {LOGIN_ENDPOINT} from '../../lib/utils/endpoint';
-    import {userStore} from '$lib/stores/index.js';
+    import {SIGNUP_ENDPOINT} from '../../lib/utils/endpoint';
     import { error } from '@sveltejs/kit';
     import axios from 'axios';
 
@@ -12,7 +11,7 @@
     let errorMessage = '';
     let successMessage = '';
 
-    async function handleLogin(){
+    async function handleSignup(){
         if(!username||!password){
             errorMessage = 'Please fill in both username and password';
             return
@@ -23,26 +22,14 @@
         successMessage = '';
 
         try{
-            const response = await axios.post(LOGIN_ENDPOINT,{
+            const response = await axios.post(SIGNUP_ENDPOINT,{
                 userName:username,
                 password
             })
 
-            console.log('response',response)
+            if(response?.data?.data?.message){
+                successMessage = 'Sign up successful . Now Go back to Login page';
 
-            if(response?.data?.data?.token){
-                successMessage = 'Login successful! Redirecting ...';
-                localStorage.setItem('token',response.data.data.token);
-
-                const userInfo = {
-                    username:username,
-                    userId:username,
-                    token:response?.data?.data?.token
-                }
-
-                userStore.set(userInfo)
-
-                goto("/prompt")
             }else {
                 errorMessage = response.data?.data.message
             }
@@ -56,19 +43,29 @@
 
     function handleSubmit(event){
         event.preventDefault();
-        handleLogin()
+        handleSignup()
     }
+
 </script>
 
 <svelte:head>
-	<title>Login</title>
+	<title>Sign Up</title>
 	<meta name="login" content="Login page" />
 </svelte:head>
 
 
+      <a class="back-section" href="/login">
+        <span>←</span>
+        Back to Login
+      </a>  
+
 <section>
+    
 	<div class="login-container">
-		<h1>Login</h1>
+		
+        <h1>Sign Up</h1>
+
+
 		
 		<form on:submit={handleSubmit} class="login-form">
 			<div class="form-group">
@@ -112,7 +109,7 @@
 				class="login-btn"
 				disabled={loading}
 			>
-				{loading ? 'Signing in...' : 'Sign In'}
+				{loading ? 'Signing up...' : 'Sign Up'}
 			</button>
 
             	
@@ -121,11 +118,6 @@
       
 		
 	</div>
-      <a
-			class="signup-btn"
-            href="/register"
-			>
-				{'New user ? Register Here !'}
-</a>
+     
 </section>
 

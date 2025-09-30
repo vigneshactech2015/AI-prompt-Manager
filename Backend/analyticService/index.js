@@ -6,6 +6,8 @@ const app = express()
 const PORT = process.env.PORT
 const cors = require('cors');
 
+const analyticRoutes = require('./routes/analyticRoutes')
+
 app.use(cors({
   origin: '*',
   credentials: true,

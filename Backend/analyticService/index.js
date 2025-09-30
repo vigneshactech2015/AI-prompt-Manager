@@ -17,7 +17,7 @@ app.use(cors({
 
 app.use(express.json())
 
-app.get('/api/analyticService',analyticRoutes)
+app.use('/api/analyticService',analyticRoutes)
 
 app.listen(PORT,()=>{
     console.log(`analytic service is listening on port number ${PORT}`)

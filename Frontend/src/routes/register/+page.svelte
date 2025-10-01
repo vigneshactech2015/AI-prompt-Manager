@@ -49,8 +49,8 @@
 </script>
 
 <svelte:head>
-	<title>Sign Up</title>
-	<meta name="login" content="Login page" />
+	<title>Prompt Manager</title>
+	<meta name="login" content="Prompt Manager Sign up" />
 </svelte:head>
 
 
@@ -63,7 +63,7 @@
     
 	<div class="login-container">
 		
-        <h1>Sign Up</h1>
+        <h1>PM Tool</h1>
 
 
 		

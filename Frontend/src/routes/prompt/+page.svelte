@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { userStore } from '$lib/stores';
+	import { get } from 'svelte/store';
 	import axios from 'axios';
 	import './dashboard.css';
     import { ADD_PROMPT, COPY_PROMPT, DELETE_PROMPT, EDIT_PROMPT, FAVORITE_PROMPT, GET_PROMPT, PROMPTSERVICEURL } from '$lib/utils/endpoint';
@@ -41,27 +42,23 @@
 	let user = null;
 	let token = null;
 
-	// API Base URLs
-	
 
-	// Subscribe to user store
+	// Subscribe to user store to get token for API calls
 	userStore.subscribe((value) => {
 		user = value;
 		token = user?.token;
-	});
+	});	
 
-	// Initialize user store and check authentication
+	// Initialize and fetch prompts (authentication is handled in layout)
 	onMount(() => {
 		userStore.init();
 		
-		// Check if user is authenticated
+		// Small delay to ensure user store is initialized
 		setTimeout(() => {
-			if (!user || !token) {
-				goto('/login');
-				return;
+			if (token) {
+				fetchPrompts();
 			}
-			fetchPrompts();
-		}, 100);
+		}, 50);
 	});
 
 	// API Headers
@@ -267,21 +264,19 @@
 </svelte:head>
 
 <div class="dashboard-container">
-	<!-- Header -->
-	<div class="dashboard-header">
-		<div class="header-content">
-			<div class="header-info">
-				<h1>Prompt Dashboard</h1>
-				<p>Manage and organize your AI prompts</p>
-			</div>
-			<button 
-				on:click={() => showModal = true}
-				class="add-prompt-btn"
-			>
-				<span class="add-icon">+</span>
-				Add Prompt
-			</button>
+	<!-- Page Header -->
+	<div class="page-header">
+		<div class="page-title">
+			<h1>Prompt Dashboard</h1>
+			<p>Manage and organize your AI prompts</p>
 		</div>
+		<button 
+			on:click={() => showModal = true}
+			class="add-prompt-btn"
+		>
+			<span class="add-icon">+</span>
+			Add Prompt
+		</button>
 	</div>
 
 	<!-- Filters and Search -->

@@ -61,14 +61,14 @@
 </script>
 
 <svelte:head>
-	<title>Login</title>
-	<meta name="login" content="Login page" />
+	<title>Prompt Manager</title>
+	<meta name="login" content="Prompt Manager Login page" />
 </svelte:head>
 
 
 <section>
 	<div class="login-container">
-		<h1>Login</h1>
+		<h1>PM Tool</h1>
 		
 		<form on:submit={handleSubmit} class="login-form">
 			<div class="form-group">

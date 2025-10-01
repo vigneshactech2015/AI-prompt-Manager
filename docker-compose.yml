@@ -1,0 +1,34 @@
+services:
+  frontend:
+    image: vigneshactech2015/pmfrontend
+    container_name: frontend
+    ports:
+     - "5173:5173"
+    networks:
+     - mynetwork
+
+  authservice:
+    image: vigneshactech2015/pmauthservice
+    container_name: authservice
+    ports:
+     - "3002:3002"
+    networks:
+     - mynetwork
+
+  promptservice:
+    image: vigneshactech2015/pmpromptservice
+    container_name: promptservice
+    ports:
+     - "3003:3003"
+    networks:
+     - mynetwork
+
+  analyticservice:
+    image: vigneshactech2015/pmanalyticservice
+    container_name: analyticservice
+    ports:
+     - "3004:3004"
+
+networks:
+  mynetwork:
+    driver: bridge

@@ -4,7 +4,7 @@
 	import { userStore } from '$lib/stores';
 	import axios from 'axios';
 	import './dashboard.css';
-    import { ADD_PROMPT, COPY_PROMPT, DELETE_PROMPT, EDIT_PROMPT, FAVORITE_PROMPT, GET_PROMPT } from '$lib/utils/endpoint';
+    import { ADD_PROMPT, COPY_PROMPT, DELETE_PROMPT, EDIT_PROMPT, FAVORITE_PROMPT, GET_PROMPT, PROMPTSERVICEURL } from '$lib/utils/endpoint';
 
 	// State variables
 	let prompts = [];
@@ -205,7 +205,7 @@
 			await navigator.clipboard.writeText(prompt.description);
 			
 			// Track copy for analytics
-			await axios.post(`${PROMPT_API}/trackCopy/${prompt._id}`, {}, {
+			await axios.post(`${PROMPTSERVICEURL}/trackCopy/${prompt._id}`, {}, {
 				headers: getHeaders()
 			});
 			

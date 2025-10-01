@@ -28,6 +28,8 @@ services:
     container_name: analyticservice
     ports:
      - "3004:3004"
+    networks:
+     - mynetwork
 
 networks:
   mynetwork:

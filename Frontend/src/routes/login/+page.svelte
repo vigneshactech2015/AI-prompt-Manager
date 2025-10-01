@@ -28,8 +28,6 @@
                 password
             })
 
-            console.log('response',response)
-
             if(response?.data?.data?.token){
                 successMessage = 'Login successful! Redirecting ...';
                 localStorage.setItem('token',response.data.data.token);

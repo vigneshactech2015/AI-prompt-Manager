@@ -465,16 +465,6 @@
 						</select>
 					</div>
 					
-					<div class="form-group">
-						<label class="checkbox-group">
-							<input 
-								type="checkbox" 
-								bind:checked={formData.isFavorite}
-								class="checkbox"
-							/>
-							<span>Mark as favorite</span>
-						</label>
-					</div>
 					
 					<div class="modal-actions">
 						<button 

@@ -1,5 +1,7 @@
 # AI Prompt Manager
 
+AI Prompt Manager is a comprehensive web application designed to help users organize, manage, and track their AI prompts efficiently. The platform allows users to create, edit, and categorize prompts for different AI tools like ChatGPT, Claude, and Gemini. With built-in analytics, users can monitor prompt performance through view counts, copy statistics, and favorite tracking. The application features user authentication, CRUD operations for prompts, and detailed reporting dashboards. It's built as a microservices architecture to ensure scalability and maintainability for prompt management workflows.
+
 ## Getting Started
 
 Run the following command at the root directory to start the application:
